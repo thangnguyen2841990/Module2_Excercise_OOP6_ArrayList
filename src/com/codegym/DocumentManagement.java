@@ -52,22 +52,75 @@ public class DocumentManagement {
         bufferedWriter.close();
         fileWriter.close();
     }
+
     public void readFiles(String path) throws IOException {
         FileReader fileReader = new FileReader(path);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = null;
-        while((line = bufferedReader.readLine()) != null){
+        while ((line = bufferedReader.readLine()) != null) {
             String[] lines = line.split(",");
-            int documentCode = Integer.parseInt(lines[0].trim());
-            String imprint = lines[1].trim();
-            int releaseNumber = Integer.parseInt(lines[2].trim());
-
+            int size = lines.length;
+            if (size == 5){
+                int documentCode = Integer.parseInt(lines[0].trim());
+                String imprint = lines[1].trim();
+                int releaseNumber = Integer.parseInt(lines[2].trim());
+                String nameOfWriter = lines[3].trim();
+                int totalPages = Integer.parseInt(lines[4].trim());
+                Document document = new Book(documentCode,imprint,releaseNumber,nameOfWriter,totalPages);
+                int issueNumber  = Integer.parseInt(lines[3].trim());
+                int releaseMonth  = Integer.parseInt(lines[4].trim());
+                document = new Magazine(documentCode,imprint,releaseNumber,issueNumber,releaseMonth);
+                this.documents.add(document);
+            }
+            if (size == 4) {
+                int documentCode = Integer.parseInt(lines[0].trim());
+                String imprint = lines[1].trim();
+                int releaseNumber = Integer.parseInt(lines[2].trim());
+                int releaseDate = Integer.parseInt(lines[3].trim());
+                Document document = new NewsPaper(documentCode,imprint,releaseNumber,releaseDate);
+                this.documents.add(document);
+            }
 
         }
         bufferedReader.close();
         fileReader.close();
     }
-    public  void menu() {
+//    public void readFiles1(String path) throws IOException {
+//        FileReader fileReader = new FileReader(path);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        String line = null;
+//        while ((line = bufferedReader.readLine()) != null) {
+//            String[] lines = line.split(",");
+//            int documentCode = Integer.parseInt(lines[0].trim());
+//            String imprint = lines[1].trim();
+//            int releaseNumber = Integer.parseInt(lines[2].trim());
+//            int releaseDate = Integer.parseInt(lines[3].trim());
+//            Document document = new NewsPaper(documentCode,imprint,releaseNumber,releaseDate);
+//            this.documents.add(document);
+//        }
+//        bufferedReader.close();
+//        fileReader.close();
+//    }
+//    public void readFiles2(String path) throws IOException {
+//        FileReader fileReader = new FileReader(path);
+//        BufferedReader bufferedReader = new BufferedReader(fileReader);
+//        String line = null;
+//        while ((line = bufferedReader.readLine()) != null) {
+//            String[] lines = line.split(",");
+//            int documentCode = Integer.parseInt(lines[0].trim());
+//            String imprint = lines[1].trim();
+//            int releaseNumber = Integer.parseInt(lines[2].trim());
+//            int issueNumber  = Integer.parseInt(lines[3].trim());
+//            int releaseMonth  = Integer.parseInt(lines[4].trim());
+//            Document document = new Magazine(documentCode,imprint,releaseNumber,issueNumber,releaseMonth);
+//            this.documents.add(document);
+//        }
+//        bufferedReader.close();
+//        fileReader.close();
+//    }
+
+
+    public void menu() {
         System.out.println("----MENU QUẢN LÝ TÀI LIỆU----");
         System.out.println("1. Hiển thị tất cả tài liệu");
         System.out.println("2. Nhập thông tin  tài liệu mới");
@@ -75,7 +128,7 @@ public class DocumentManagement {
         System.out.println("4. Thoát");
     }
 
-    public  Book inputNewBook() {
+    public Book inputNewBook() {
         System.out.println("Mã tài liệu: ");
         int documentCode = scanner.nextInt();
         scanner.nextLine();
@@ -91,7 +144,7 @@ public class DocumentManagement {
         return new Book(documentCode, imprint, releaseNumber, nameOfWriter, totalPages);
     }
 
-    public  Magazine inputNewMagazine() {
+    public Magazine inputNewMagazine() {
         System.out.println("Mã tài liệu: ");
         int documentCode = scanner.nextInt();
         scanner.nextLine();
@@ -107,7 +160,7 @@ public class DocumentManagement {
 
     }
 
-    public  NewsPaper inputNewPaper() {
+    public NewsPaper inputNewPaper() {
         System.out.println("Mã tài liệu: ");
         int documentCode = scanner.nextInt();
         scanner.nextLine();
@@ -120,7 +173,7 @@ public class DocumentManagement {
         return new NewsPaper(documentCode, imprint, releaseNumber, releaseDate);
     }
 
-    public  Document creatNewDocument() {
+    public Document creatNewDocument() {
         System.out.println("1. Sách.");
         System.out.println("2. Tạp chí");
         System.out.println("3. Báo");

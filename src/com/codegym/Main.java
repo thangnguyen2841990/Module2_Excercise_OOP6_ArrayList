@@ -11,6 +11,7 @@ public class Main {
         DocumentManagement documentManagement = new DocumentManagement();
         try {
             documentManagement.readFiles("document.txt");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
