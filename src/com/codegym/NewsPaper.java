@@ -22,6 +22,6 @@ public class NewsPaper extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", ngày phát hành: " + this.releaseDate;
+        return super.toString() + ", " + this.releaseDate;
     }
 }

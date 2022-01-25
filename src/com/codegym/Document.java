@@ -40,6 +40,6 @@ public class Document {
 
     @Override
     public String toString() {
-        return "Mã tài liệu: " + this.documentCode + ", Tên nhà xuất bản: " + this.imprint + ", Số bản phát hành: " + this.releaseNumber;
+        return this.documentCode + ", " + this.imprint + ", " + this.releaseNumber;
     }
 }

@@ -33,6 +33,6 @@ public class Magazine extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", số phát hành: " + this.issueNumber + ", tháng phát hành: " + this.releaseMonth;
+        return super.toString() + ", " + this.issueNumber + ", " + this.releaseMonth;
     }
 }

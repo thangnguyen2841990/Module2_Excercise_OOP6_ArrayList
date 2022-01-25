@@ -33,6 +33,6 @@ public class Book extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", Tên tác giả: " + this.nameOfWriter + ", Tổng số trang: " + this.totalPages;
+        return super.toString() + ", " + this.nameOfWriter + ", " + this.totalPages;
     }
 }
