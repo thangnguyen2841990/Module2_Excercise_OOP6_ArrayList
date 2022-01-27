@@ -1,6 +1,8 @@
 package com.codegym;
 
-public class Magazine extends Document {
+import java.io.Serializable;
+
+public class Magazine extends Document implements Serializable {
     private int issueNumber;
     private int releaseMonth;
 
@@ -33,6 +35,6 @@ public class Magazine extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.issueNumber + ", " + this.releaseMonth;
+        return super.toString() + "\n Số phát hành:  " + this.issueNumber + ", tháng phát hành: " + this.releaseMonth;
     }
 }

@@ -1,6 +1,8 @@
 package com.codegym;
 
-public class Book extends Document {
+import java.io.Serializable;
+
+public class Book extends Document implements Serializable {
     private String nameOfWriter;
     private int totalPages;
 
@@ -33,6 +35,6 @@ public class Book extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.nameOfWriter + ", " + this.totalPages;
+        return super.toString() + "\nTên tác giả:" + this.nameOfWriter + ", tổng số trang: " + this.totalPages;
     }
 }

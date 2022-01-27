@@ -1,6 +1,8 @@
 package com.codegym;
 
-public class Document {
+import java.io.Serializable;
+
+public class Document  implements Serializable {
     protected int documentCode;
     protected String imprint;
     protected int releaseNumber;
@@ -40,6 +42,6 @@ public class Document {
 
     @Override
     public String toString() {
-        return this.documentCode + ", " + this.imprint + ", " + this.releaseNumber;
+        return "Mã tài liệu: "+this.documentCode + ", Nhà xuất bản: " + this.imprint + ", Số phát hành: " + this.releaseNumber;
     }
 }

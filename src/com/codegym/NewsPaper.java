@@ -1,6 +1,8 @@
 package com.codegym;
 
-public class NewsPaper extends Document {
+import java.io.Serializable;
+
+public class NewsPaper extends Document implements Serializable {
     private int releaseDate;
 
     public NewsPaper(int releaseDate) {
@@ -22,6 +24,6 @@ public class NewsPaper extends Document {
 
     @Override
     public String toString() {
-        return super.toString() + ", " + this.releaseDate;
+        return super.toString() + "\n Ngày phát hành" + this.releaseDate;
     }
 }

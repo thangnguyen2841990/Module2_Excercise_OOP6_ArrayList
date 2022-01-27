@@ -2,6 +2,7 @@ package com.codegym;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DocumentManagement {
@@ -42,82 +43,59 @@ public class DocumentManagement {
         }
         return index;
     }
-
-    public void writeToFiles(String path) throws IOException {
-        FileWriter fileWriter = new FileWriter(path);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        for (Document document : documents) {
-            bufferedWriter.write(document.toString() + "\n");
-        }
-        bufferedWriter.close();
-        fileWriter.close();
-    }
-
-    public void readFiles(String path) throws IOException {
-        FileReader fileReader = new FileReader(path);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-        String line = null;
-        while ((line = bufferedReader.readLine()) != null) {
-            String[] lines = line.split(",");
-            int size = lines.length;
-            if (size == 5){
-                int documentCode = Integer.parseInt(lines[0].trim());
-                String imprint = lines[1].trim();
-                int releaseNumber = Integer.parseInt(lines[2].trim());
-                String nameOfWriter = lines[3].trim();
-                int totalPages = Integer.parseInt(lines[4].trim());
-                Document document = new Book(documentCode,imprint,releaseNumber,nameOfWriter,totalPages);
-                int issueNumber  = Integer.parseInt(lines[3].trim());
-                int releaseMonth  = Integer.parseInt(lines[4].trim());
-                document = new Magazine(documentCode,imprint,releaseNumber,issueNumber,releaseMonth);
-                this.documents.add(document);
-            }
-            if (size == 4) {
-                int documentCode = Integer.parseInt(lines[0].trim());
-                String imprint = lines[1].trim();
-                int releaseNumber = Integer.parseInt(lines[2].trim());
-                int releaseDate = Integer.parseInt(lines[3].trim());
-                Document document = new NewsPaper(documentCode,imprint,releaseNumber,releaseDate);
-                this.documents.add(document);
-            }
-
-        }
-        bufferedReader.close();
-        fileReader.close();
-    }
-//    public void readFiles1(String path) throws IOException {
+public void writerToFile(List<Document> documents, String path) throws IOException {
+        OutputStream os = new FileOutputStream(path);
+        ObjectOutputStream oos = new ObjectOutputStream(os);
+        oos.writeObject(documents);
+}
+public void readerFile(String path) throws IOException, ClassNotFoundException {
+        InputStream is = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(is);
+        this.documents = (ArrayList<Document>) ois.readObject();
+}
+//    public void writeToFiles(String path) throws IOException {
+//        FileWriter fileWriter = new FileWriter(path);
+//        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+//        for (Document document : documents) {
+//            bufferedWriter.write(document.toString() + "\n");
+//        }
+//        bufferedWriter.close();
+//        fileWriter.close();
+//    }
+//
+//    public void readFiles(String path) throws IOException {
 //        FileReader fileReader = new FileReader(path);
 //        BufferedReader bufferedReader = new BufferedReader(fileReader);
 //        String line = null;
 //        while ((line = bufferedReader.readLine()) != null) {
 //            String[] lines = line.split(",");
-//            int documentCode = Integer.parseInt(lines[0].trim());
-//            String imprint = lines[1].trim();
-//            int releaseNumber = Integer.parseInt(lines[2].trim());
-//            int releaseDate = Integer.parseInt(lines[3].trim());
-//            Document document = new NewsPaper(documentCode,imprint,releaseNumber,releaseDate);
-//            this.documents.add(document);
+//            int size = lines.length;
+//            if (size == 5){
+//                int documentCode = Integer.parseInt(lines[0].trim());
+//                String imprint = lines[1].trim();
+//                int releaseNumber = Integer.parseInt(lines[2].trim());
+//                String nameOfWriter = lines[3].trim();
+//                int totalPages = Integer.parseInt(lines[4].trim());
+//                Document document = new Book(documentCode,imprint,releaseNumber,nameOfWriter,totalPages);
+//                int issueNumber  = Integer.parseInt(lines[3].trim());
+//                int releaseMonth  = Integer.parseInt(lines[4].trim());
+//                document = new Magazine(documentCode,imprint,releaseNumber,issueNumber,releaseMonth);
+//                this.documents.add(document);
+//            }
+//            if (size == 4) {
+//                int documentCode = Integer.parseInt(lines[0].trim());
+//                String imprint = lines[1].trim();
+//                int releaseNumber = Integer.parseInt(lines[2].trim());
+//                int releaseDate = Integer.parseInt(lines[3].trim());
+//                Document document = new NewsPaper(documentCode,imprint,releaseNumber,releaseDate);
+//                this.documents.add(document);
+//            }
+//
 //        }
 //        bufferedReader.close();
 //        fileReader.close();
 //    }
-//    public void readFiles2(String path) throws IOException {
-//        FileReader fileReader = new FileReader(path);
-//        BufferedReader bufferedReader = new BufferedReader(fileReader);
-//        String line = null;
-//        while ((line = bufferedReader.readLine()) != null) {
-//            String[] lines = line.split(",");
-//            int documentCode = Integer.parseInt(lines[0].trim());
-//            String imprint = lines[1].trim();
-//            int releaseNumber = Integer.parseInt(lines[2].trim());
-//            int issueNumber  = Integer.parseInt(lines[3].trim());
-//            int releaseMonth  = Integer.parseInt(lines[4].trim());
-//            Document document = new Magazine(documentCode,imprint,releaseNumber,issueNumber,releaseMonth);
-//            this.documents.add(document);
-//        }
-//        bufferedReader.close();
-//        fileReader.close();
-//    }
+
 
 
     public void menu() {

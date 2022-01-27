@@ -9,10 +9,10 @@ public class Main {
     public static void main(String[] args) {
         int choice = -1;
         DocumentManagement documentManagement = new DocumentManagement();
-        try {
-            documentManagement.readFiles("document.txt");
 
-        } catch (IOException e) {
+        try {
+            documentManagement.readerFile("document.txt");
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         do {
@@ -57,7 +57,7 @@ public class Main {
                 }
             }
             try {
-                documentManagement.writeToFiles("document.txt");
+                documentManagement.writerToFile(documentManagement.getDocuments(),"document.txt");
             } catch (IOException e) {
                 e.printStackTrace();
             }
